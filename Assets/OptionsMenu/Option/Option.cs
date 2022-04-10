@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Option : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private Image SelectedArrow;
+
+    public void SetSelected()
     {
-        
+        var transparentColor = SelectedArrow.color;
+        transparentColor.a = 1f;
+        SelectedArrow.color = transparentColor;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetUnselected()
     {
-        
+        var transparentColor = SelectedArrow.color;
+        transparentColor.a = 0f;
+        SelectedArrow.color = transparentColor;
     }
 }

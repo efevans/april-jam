@@ -21,15 +21,12 @@ public class ShopKeeper : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.W))
         {
-            StartCoroutine(Cheer());
+            Animator.SetTrigger("Toss");
         }
-    }
-
-    public IEnumerator Cheer()
-    {
-        Animator.SetTrigger("StartCheering");
-        yield return new WaitForSeconds(5);
-        Animator.SetTrigger("StopCheering");
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            Animator.SetTrigger("Sheesh");
+        }
     }
 
     public void MoveToPoint(Vector2 point)
