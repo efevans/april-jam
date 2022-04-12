@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +24,23 @@ public class OptionsMenu : MonoBehaviour
     void Start()
     {
         CurrentOption = null;
+        SetOptions();
         UnselectAll();
+    }
+
+    private void SetOptions()
+    {
+        BuyOption.LeftDestination = BuyOption.RightDestination = DeclineOption;
+        BuyOption.DownDestination = BuyOption.UpDestination = HaggleOption;
+
+        DeclineOption.LeftDestination = DeclineOption.RightDestination = BuyOption;
+        DeclineOption.DownDestination = DeclineOption.UpDestination = SheeshOption;
+
+        HaggleOption.LeftDestination = HaggleOption.RightDestination = SheeshOption;
+        HaggleOption.DownDestination = HaggleOption.UpDestination = BuyOption;
+
+        SheeshOption.LeftDestination = SheeshOption.RightDestination = HaggleOption;
+        SheeshOption.DownDestination = SheeshOption.UpDestination = DeclineOption;
     }
 
     // Update is called once per frame
@@ -31,28 +48,47 @@ public class OptionsMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (CurrentOption == BuyOption)
+            if (CurrentOption == null)
             {
-                CurrentOption = DeclineOption;
-            }
-            else if (CurrentOption == DeclineOption)
-            {
-                CurrentOption = HaggleOption;
-            }
-            else if (CurrentOption == HaggleOption)
-            {
-                CurrentOption = SheeshOption;
-            }
-            else if (CurrentOption == SheeshOption)
-            {
-                CurrentOption = BuyOption;
+                SetCurrentOption(BuyOption);
             }
             else
             {
-                CurrentOption = BuyOption;
+                SetCurrentOption(CurrentOption.RightDestination);
             }
-            UnselectAll();
-            CurrentOption.SetSelected();
+        }
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            if (CurrentOption == null)
+            {
+                SetCurrentOption(BuyOption);
+            }
+            else
+            {
+                SetCurrentOption(CurrentOption.LeftDestination);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (CurrentOption == null)
+            {
+                SetCurrentOption(BuyOption);
+            }
+            else
+            {
+                SetCurrentOption(CurrentOption.UpDestination);
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            if (CurrentOption == null)
+            {
+                SetCurrentOption(BuyOption);
+            }
+            else
+            {
+                SetCurrentOption(CurrentOption.DownDestination);
+            }
         }
     }
 
@@ -62,5 +98,12 @@ public class OptionsMenu : MonoBehaviour
         DeclineOption.SetUnselected();
         HaggleOption.SetUnselected();
         SheeshOption.SetUnselected();
+    }
+
+    private void SetCurrentOption(Option option)
+    {
+        UnselectAll();
+        CurrentOption = option;
+        CurrentOption.SetSelected();
     }
 }

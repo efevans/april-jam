@@ -8,6 +8,11 @@ public class Option : MonoBehaviour
     [SerializeField]
     private Image SelectedArrow;
 
+    public Option LeftDestination { get; set; }
+    public Option RightDestination { get; set; }
+    public Option UpDestination { get; set; }
+    public Option DownDestination { get; set; }
+
     public void SetSelected()
     {
         var transparentColor = SelectedArrow.color;
