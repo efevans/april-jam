@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class OptionsMenu : MonoBehaviour
 {
@@ -19,6 +20,15 @@ public class OptionsMenu : MonoBehaviour
 
     private Option CurrentOption;
 
+    private AudioSource _audioSource;
+    private Settings _mySettings;
+
+    [Inject]
+    public void Construct(AudioSource audioSource, Settings settings)
+    {
+        _audioSource = audioSource;
+        _mySettings = settings;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -105,5 +115,12 @@ public class OptionsMenu : MonoBehaviour
         UnselectAll();
         CurrentOption = option;
         CurrentOption.SetSelected();
+        _audioSource.PlayOneShot(_mySettings.OnMoveCursor);
+    }
+
+    [Serializable]
+    public class Settings
+    {
+        public AudioClip OnMoveCursor;
     }
 }
