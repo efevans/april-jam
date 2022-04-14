@@ -7,6 +7,9 @@ using Zenject;
 public class OptionsMenu : MonoBehaviour
 {
     [SerializeField]
+    private Item TempItem;
+
+    [SerializeField]
     private Option BuyOption;
 
     [SerializeField]
@@ -105,7 +108,7 @@ public class OptionsMenu : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            _itemDisplay.Display();
+            _itemDisplay.Display(TempItem, 120);
         }
 
         if (Input.GetKeyDown(KeyCode.X))
