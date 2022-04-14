@@ -7,9 +7,6 @@ using Zenject;
 public class OptionsMenu : MonoBehaviour
 {
     [SerializeField]
-    private Item TempItem;
-
-    [SerializeField]
     private Option BuyOption;
 
     [SerializeField]
@@ -24,14 +21,12 @@ public class OptionsMenu : MonoBehaviour
     private Option CurrentOption;
 
     private AudioSource _audioSource;
-    private ItemDisplay _itemDisplay;
     private Settings _mySettings;
 
     [Inject]
-    public void Construct(AudioSource audioSource, ItemDisplay itemDisplay, Settings settings)
+    public void Construct(AudioSource audioSource, Settings settings)
     {
         _audioSource = audioSource;
-        _itemDisplay = itemDisplay;
         _mySettings = settings;
     }
 
@@ -104,16 +99,6 @@ public class OptionsMenu : MonoBehaviour
             {
                 SetCurrentOption(CurrentOption.DownDestination);
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            _itemDisplay.Display(TempItem, 120);
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            _itemDisplay.CloseDisplay();
         }
     }
 

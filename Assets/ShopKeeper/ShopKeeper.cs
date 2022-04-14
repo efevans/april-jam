@@ -1,13 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class ShopKeeper : MonoBehaviour
 {
     [SerializeField]
+    private Item TempItem;
+
+    [SerializeField]
+    private OptionsMenu TempOptionsMenu;
+
+    [SerializeField]
     private Animator Animator;
     [SerializeField]
     private float Speed;
+
+    private ItemDisplay _itemDisplay;
+
+    [Inject]
+    public void Construct(ItemDisplay itemDisplay)
+    {
+        _itemDisplay = itemDisplay;
+    }
 
     void Update()
     {
@@ -26,6 +41,18 @@ public class ShopKeeper : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             Animator.SetTrigger("Sheesh");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            _itemDisplay.Display(TempItem, 120);
+            TempOptionsMenu.gameObject.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            _itemDisplay.CloseDisplay();
+            TempOptionsMenu.gameObject.SetActive(false);
         }
     }
 
