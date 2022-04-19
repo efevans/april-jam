@@ -6,17 +6,10 @@ using Zenject;
 
 public class OptionsMenu : MonoBehaviour
 {
-    [SerializeField]
-    private Option BuyOption;
-
-    [SerializeField]
-    private Option DeclineOption;
-
-    [SerializeField]
-    private Option HaggleOption;
-
-    [SerializeField]
-    private Option SheeshOption;
+    public Option BuyOption;
+    public Option DeclineOption;
+    public Option HaggleOption;
+    public Option SheeshOption;
 
     private Option CurrentOption;
 
@@ -31,11 +24,21 @@ public class OptionsMenu : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        CurrentOption = null;
-        SetOptions();
         UnselectAll();
+        SetOptions();
+        SetCurrentOption(BuyOption);
+    }
+
+    public void Display()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void CloseDisplay()
+    {
+        gameObject.SetActive(false);
     }
 
     private void SetOptions()
@@ -56,6 +59,14 @@ public class OptionsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (CurrentOption != null)
+            {
+                CurrentOption.Select();
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (CurrentOption == null)
@@ -114,8 +125,12 @@ public class OptionsMenu : MonoBehaviour
     {
         UnselectAll();
         CurrentOption = option;
-        CurrentOption.SetSelected();
-        _audioSource.PlayOneShot(_mySettings.OnMoveCursor);
+
+        if (option != null)
+        {
+            CurrentOption.SetSelected();
+            _audioSource.PlayOneShot(_mySettings.OnMoveCursor);
+        }
     }
 
     [Serializable]

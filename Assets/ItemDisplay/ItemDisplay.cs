@@ -17,6 +17,9 @@ public class ItemDisplay : MonoBehaviour
     private AudioSource _audioSource;
     private Settings _mySettings;
 
+    [SerializeField]
+    private Item _defaultItem;
+
     [Inject]
     public void Construct(AudioSource audioSource, Settings settings)
     {
@@ -24,7 +27,12 @@ public class ItemDisplay : MonoBehaviour
         _mySettings = settings;
     }
 
-    public void Display(Item item, int price)
+    public void Display()
+    {
+        Display(_defaultItem, 0);
+    }
+
+    private void Display(Item item, int price)
     {
         _itemImage.sprite = item.Sprite;
         _priceTextObject.text = $"{price}G";

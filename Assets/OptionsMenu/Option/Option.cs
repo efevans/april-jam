@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,18 @@ public class Option : MonoBehaviour
     public Option RightDestination { get; set; }
     public Option UpDestination { get; set; }
     public Option DownDestination { get; set; }
+
+    private Action _onSelect;
+
+    public void Select()
+    {
+        _onSelect();
+    }
+
+    public void SetCallback(Action onSelect)
+    {
+        _onSelect = onSelect;
+    }
 
     public void SetSelected()
     {
