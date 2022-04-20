@@ -8,10 +8,12 @@ public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInsta
 {
     public OptionsMenu.Settings OptionsMenuSettings;
     public ItemDisplay.Settings ItemDisplaySettings;
+    public GameController.Settings GameControllerSettings;
 
     public override void InstallBindings()
     {
         Container.BindInstance(OptionsMenuSettings);
         Container.BindInstance(ItemDisplaySettings);
+        Container.BindInstance(GameControllerSettings);
     }
 }

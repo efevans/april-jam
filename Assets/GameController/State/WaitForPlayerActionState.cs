@@ -29,6 +29,7 @@ public class WaitForPlayerActionState : GameState
     private void BuyItem()
     {
         Debug.Log("Buy");
+        _gameController.PurchaseItem(80);
         Proceed();
     }
 }
