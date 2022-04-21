@@ -8172,6 +8172,7 @@ MonoBehaviour:
   Patron: {fileID: 1653417391}
   ShopKeeper: {fileID: 1079305745}
   SceneLocations: {fileID: 1137697403}
+  ItemDatabase: {fileID: 11400000, guid: 9e517fdf902e7154c82da1bb7edcde2c, type: 2}
 --- !u!1 &1570400337
 GameObject:
   m_ObjectHideFlags: 0

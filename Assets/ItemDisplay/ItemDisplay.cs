@@ -35,7 +35,7 @@ public class ItemDisplay : MonoBehaviour
         Display(_defaultItem, _defaultItem.Value);
     }
 
-    private void Display(Item item, int price)
+    public void Display(Item item, int price)
     {
         CurrentItem = item;
         CurrentOffer = price;

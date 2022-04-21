@@ -10,6 +10,7 @@ public class GameInstaller : MonoInstaller
     public Patron Patron;
     public ShopKeeper ShopKeeper;
     public SceneLocations SceneLocations;
+    public ItemDatabase ItemDatabase;
 
     public override void InstallBindings()
     {
@@ -30,6 +31,9 @@ public class GameInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<GoldDisplay>()
             .FromInstance(GoldDisplay);
+
+        Container.BindInterfacesAndSelfTo<ItemDatabase>()
+            .FromInstance(ItemDatabase);
 
         Container.BindInterfacesAndSelfTo<SceneLocations>()
             .FromInstance(SceneLocations);

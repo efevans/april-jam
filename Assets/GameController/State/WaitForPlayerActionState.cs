@@ -24,8 +24,8 @@ public class WaitForPlayerActionState : GameState
     private void SetupOptionsCallbacks()
     {
         _gameController.OptionsMenu.BuyOption.SetCallback(BuyItem);
-        _gameController.OptionsMenu.DeclineOption.SetCallback(BuyItem);
-        _gameController.OptionsMenu.HaggleOption.SetCallback(BuyItem);
+        _gameController.OptionsMenu.DeclineOption.SetCallback(DeclineItem);
+        _gameController.OptionsMenu.HaggleOption.SetCallback(HagglePrice);
         _gameController.OptionsMenu.SheeshOption.SetCallback(BuyItem);
     }
 

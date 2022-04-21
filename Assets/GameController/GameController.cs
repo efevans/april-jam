@@ -13,6 +13,7 @@ public class GameController : IInitializable, ITickable
     public OptionsMenu OptionsMenu;
     public GoldDisplay GoldDisplay;
     public AudioSource AudioSource;
+    public ItemDatabase ItemDatabase;
     public Settings MySettings;
 
     public int Gold { get; private set; } = 500;
@@ -25,7 +26,8 @@ public class GameController : IInitializable, ITickable
         OptionsMenu optionsMenu,
         GoldDisplay goldDisplay,
         AudioSource audioSource,
-        Settings mySettings)
+        Settings mySettings,
+        ItemDatabase itemDatabase)
     {
         Patron = patron;
         SceneLocations = sceneLocations;
@@ -34,6 +36,7 @@ public class GameController : IInitializable, ITickable
         GoldDisplay = goldDisplay;
         AudioSource = audioSource;
         MySettings = mySettings;
+        ItemDatabase = itemDatabase;
     }
 
     public void Initialize()
