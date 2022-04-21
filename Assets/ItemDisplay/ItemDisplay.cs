@@ -20,6 +20,9 @@ public class ItemDisplay : MonoBehaviour
     [SerializeField]
     private Item _defaultItem;
 
+    public Item CurrentItem { get; private set; }
+    public int CurrentOffer { get; private set; }
+
     [Inject]
     public void Construct(AudioSource audioSource, Settings settings)
     {
@@ -29,15 +32,22 @@ public class ItemDisplay : MonoBehaviour
 
     public void Display()
     {
-        Display(_defaultItem, 0);
+        Display(_defaultItem, _defaultItem.Value);
     }
 
     private void Display(Item item, int price)
     {
-        _itemImage.sprite = item.Sprite;
-        _priceTextObject.text = $"{price}G";
+        CurrentItem = item;
+        CurrentOffer = price;
+        UpdateDisplay();
         gameObject.SetActive(true);
         _audioSource.PlayOneShot(_mySettings.OnDisplay);
+    }
+
+    private void UpdateDisplay()
+    {
+        _itemImage.sprite = CurrentItem.Sprite;
+        _priceTextObject.text = $"{CurrentOffer}G";
     }
 
     public void CloseDisplay()
