@@ -7,6 +7,7 @@ public class GameController : IInitializable, ITickable
     private GameState _gameState;
     private GameState DefaultGameState => new StartState(this);
 
+    public ShopKeeper ShopKeeper { get; private set; }
     public Patron Patron;
     public SceneLocations SceneLocations;
     public ItemDisplay ItemDisplay;
@@ -27,7 +28,8 @@ public class GameController : IInitializable, ITickable
         GoldDisplay goldDisplay,
         AudioSource audioSource,
         Settings mySettings,
-        ItemDatabase itemDatabase)
+        ItemDatabase itemDatabase,
+        ShopKeeper shopKeeper)
     {
         Patron = patron;
         SceneLocations = sceneLocations;
@@ -37,6 +39,7 @@ public class GameController : IInitializable, ITickable
         AudioSource = audioSource;
         MySettings = mySettings;
         ItemDatabase = itemDatabase;
+        ShopKeeper = shopKeeper;
     }
 
     public void Initialize()

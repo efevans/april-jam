@@ -20,26 +20,6 @@ public class ShopKeeper : MonoBehaviour
         _itemDisplay = itemDisplay;
     }
 
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    MoveToPoint(new Vector2(transform.position.x - 300, transform.position.y));
-        //}
-        //if (Input.GetKeyDown(KeyCode.D))
-        //{
-        //    MoveToPoint(new Vector2(transform.position.x + 300, transform.position.y));
-        //}
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    Animator.SetTrigger("Toss");
-        //}
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            Animator.SetTrigger("ShowItem");
-        }
-    }
-
     public IEnumerator MoveToPoint(Vector2 point)
     {
         Animator.SetTrigger("StartWalking");
@@ -62,6 +42,44 @@ public class ShopKeeper : MonoBehaviour
     public IEnumerator ShowItem()
     {
         yield return AnimationHelper.ShowItem();
+    }
+
+    public IEnumerator Research()
+    {
+        yield return AnimationHelper.Research();
+        int currentOffer = _itemDisplay.CurrentOffer;
+        int realValue = _itemDisplay.CurrentItem.Value;
+
+        Debug.Log(currentOffer);
+        Debug.Log(realValue);
+        Debug.Log(currentOffer > realValue * 1.1f);
+
+        // Display an emotion depending on the offer relative to the real value
+        if (currentOffer > realValue * 1.1f)
+        {
+            // Sweat
+            yield return AnimationHelper.Sweat();
+        }
+        else if(currentOffer < realValue * 0.9f)
+        {
+            // Exclamation
+            yield return AnimationHelper.Exclamation();
+        }
+        else
+        {
+            // Nod
+            yield return AnimationHelper.Nod();
+        }
+    }
+
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            StartCoroutine(Research());
+        }
     }
 
     private void SetFacedDirection(Vector2 point)

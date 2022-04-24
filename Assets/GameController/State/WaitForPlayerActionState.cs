@@ -10,22 +10,32 @@ public class WaitForPlayerActionState : GameState
 
     public override void Start()
     {
-        Debug.Log("waiting");
+        ShowOptions();
         SetupOptionsCallbacks();
     }
 
     private void Proceed()
     {
-        _gameController.OptionsMenu.CloseDisplay();
+        HideOptions();
         _gameController.ItemDisplay.CloseDisplay();
         _gameController.SetState(new WalkOutState(_gameController));
+    }
+
+    private void ShowOptions()
+    {
+        _gameController.OptionsMenu.Display();
+    }
+
+    private void HideOptions()
+    {
+        _gameController.OptionsMenu.CloseDisplay();
     }
 
     private void SetupOptionsCallbacks()
     {
         _gameController.OptionsMenu.BuyOption.SetCallback(BuyItem);
         _gameController.OptionsMenu.DeclineOption.SetCallback(DeclineItem);
-        _gameController.OptionsMenu.HaggleOption.SetCallback(HagglePrice);
+        _gameController.OptionsMenu.ResearchOption.SetCallback(Research);
         _gameController.OptionsMenu.SheeshOption.SetCallback(BuyItem);
     }
 
@@ -41,8 +51,15 @@ public class WaitForPlayerActionState : GameState
         Proceed();
     }
 
-    private void HagglePrice()
+    private void Research()
     {
-        Proceed();
+        _gameController.GoldDisplay.StartCoroutine(PlayoutResearch());
+    }
+
+    private IEnumerator PlayoutResearch()
+    {
+        HideOptions();
+        yield return _gameController.ShopKeeper.Research();
+        ShowOptions();
     }
 }

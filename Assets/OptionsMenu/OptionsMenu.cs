@@ -8,7 +8,7 @@ public class OptionsMenu : MonoBehaviour
 {
     public Option BuyOption;
     public Option DeclineOption;
-    public Option HaggleOption;
+    public Option ResearchOption;
     public Option SheeshOption;
 
     private Option CurrentOption;
@@ -44,15 +44,15 @@ public class OptionsMenu : MonoBehaviour
     private void SetOptions()
     {
         BuyOption.LeftDestination = BuyOption.RightDestination = DeclineOption;
-        BuyOption.DownDestination = BuyOption.UpDestination = HaggleOption;
+        BuyOption.DownDestination = BuyOption.UpDestination = ResearchOption;
 
         DeclineOption.LeftDestination = DeclineOption.RightDestination = BuyOption;
         DeclineOption.DownDestination = DeclineOption.UpDestination = SheeshOption;
 
-        HaggleOption.LeftDestination = HaggleOption.RightDestination = SheeshOption;
-        HaggleOption.DownDestination = HaggleOption.UpDestination = BuyOption;
+        ResearchOption.LeftDestination = ResearchOption.RightDestination = SheeshOption;
+        ResearchOption.DownDestination = ResearchOption.UpDestination = BuyOption;
 
-        SheeshOption.LeftDestination = SheeshOption.RightDestination = HaggleOption;
+        SheeshOption.LeftDestination = SheeshOption.RightDestination = ResearchOption;
         SheeshOption.DownDestination = SheeshOption.UpDestination = DeclineOption;
     }
 
@@ -117,7 +117,7 @@ public class OptionsMenu : MonoBehaviour
     {
         BuyOption.SetUnselected();
         DeclineOption.SetUnselected();
-        HaggleOption.SetUnselected();
+        ResearchOption.SetUnselected();
         SheeshOption.SetUnselected();
     }
 

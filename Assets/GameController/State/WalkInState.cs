@@ -18,9 +18,8 @@ public class WalkInState : GameState
         yield return _gameController.Patron.MoveToPoint(_gameController.SceneLocations.PatronStandPosition.position);
         yield return _gameController.Patron.ShowItem();
         Item item = _gameController.ItemDatabase.GetRandomItem();
-        _gameController.ItemDisplay.Display(item, item.Value - 10);
+        _gameController.ItemDisplay.Display(item, item.Value + 10);
         yield return new WaitForSeconds(1f);
-        _gameController.OptionsMenu.Display();
         _gameController.SetState(new WaitForPlayerActionState(_gameController));
     }
 }
