@@ -9,4 +9,8 @@ public class ItemDatabase : ScriptableObject
     private List<Item> Items;
 
     public Item GetRandomItem() => Items[Random.Range(0, Items.Count)];
+    public IReadOnlyList<Item> GetItems()
+    {
+        return Items.AsReadOnly();
+    }
 }

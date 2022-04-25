@@ -38,6 +38,11 @@ public class GameInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<SceneLocations>()
             .FromInstance(SceneLocations);
 
+        Container.BindInterfacesAndSelfTo<Market>()
+            .FromNew()
+            .AsSingle()
+            .Lazy();
+
         Container.BindInterfacesAndSelfTo<GameController>()
             .FromNew()
             .AsSingle()

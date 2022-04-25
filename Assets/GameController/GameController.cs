@@ -5,8 +5,9 @@ using Zenject;
 public class GameController : IInitializable, ITickable
 {
     private GameState _gameState;
-    private GameState DefaultGameState => new StartState(this);
+    private GameState DefaultGameState => new DayStartState(this);
 
+    public Market Market { get; private set; }
     public ShopKeeper ShopKeeper { get; private set; }
     public Patron Patron;
     public SceneLocations SceneLocations;
@@ -29,7 +30,8 @@ public class GameController : IInitializable, ITickable
         AudioSource audioSource,
         Settings mySettings,
         ItemDatabase itemDatabase,
-        ShopKeeper shopKeeper)
+        ShopKeeper shopKeeper,
+        Market market)
     {
         Patron = patron;
         SceneLocations = sceneLocations;
@@ -40,6 +42,7 @@ public class GameController : IInitializable, ITickable
         MySettings = mySettings;
         ItemDatabase = itemDatabase;
         ShopKeeper = shopKeeper;
+        Market = market;
     }
 
     public void Initialize()
