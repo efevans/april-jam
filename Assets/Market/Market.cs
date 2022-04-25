@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Market
 {
-    private Dictionary<Item, int> _dailyPrices = new Dictionary<Item, int>();
+    private readonly Dictionary<Item, int> _dailyPrices = new Dictionary<Item, int>();
 
     private readonly ItemDatabase _database;
 
