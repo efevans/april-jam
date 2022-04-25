@@ -13,7 +13,7 @@ public class ShopKeeper : MonoBehaviour
     private ShopKeeperAnimationHelper AnimationHelper;
 
     private ItemDisplay _itemDisplay;
-    private Market _market;
+    protected Market _market;
 
     [Inject]
     public void Construct(ItemDisplay itemDisplay, Market market)
@@ -67,16 +67,6 @@ public class ShopKeeper : MonoBehaviour
         {
             // Nod
             yield return AnimationHelper.Nod();
-        }
-    }
-
-
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            StartCoroutine(Research());
         }
     }
 

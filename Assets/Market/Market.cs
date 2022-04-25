@@ -8,8 +8,8 @@ public class Market
 
     private readonly ItemDatabase _database;
 
-    private float _upperThreshhold = 1.5f;
-    private float _lowerThreshhold = 0.6f;
+    private readonly float _upperThreshhold = 1.2f;
+    private readonly float _lowerThreshhold = 0.8f;
 
     public Market(ItemDatabase itemDatabase)
     {
@@ -23,7 +23,6 @@ public class Market
 
         foreach (Item item in _database.GetItems())
         {
-            //_dailyPrices.Add(item, RandomizePriceForItem(item));
             _dailyPrices.Add(item, ScreenPrinter.Debug(item.Name, RandomizePriceForItem(item)));
         }
     }
