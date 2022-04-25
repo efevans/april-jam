@@ -11,6 +11,7 @@ public class GameInstaller : MonoInstaller
     public ShopKeeper ShopKeeper;
     public SceneLocations SceneLocations;
     public ItemDatabase ItemDatabase;
+    public ScreenPrinter ScreenPrinter;
 
     public override void InstallBindings()
     {

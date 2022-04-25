@@ -47,7 +47,7 @@ public class GameController : IInitializable, ITickable
 
     public void Initialize()
     {
-        _gameState = DefaultGameState;
+        SetState(DefaultGameState);
         GoldDisplay.SetGold(Gold);
     }
 

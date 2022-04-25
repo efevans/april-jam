@@ -13,11 +13,13 @@ public class ShopKeeper : MonoBehaviour
     private ShopKeeperAnimationHelper AnimationHelper;
 
     private ItemDisplay _itemDisplay;
+    private Market _market;
 
     [Inject]
-    public void Construct(ItemDisplay itemDisplay)
+    public void Construct(ItemDisplay itemDisplay, Market market)
     {
         _itemDisplay = itemDisplay;
+        _market = market;
     }
 
     public IEnumerator MoveToPoint(Vector2 point)
@@ -48,19 +50,15 @@ public class ShopKeeper : MonoBehaviour
     {
         yield return AnimationHelper.Research();
         int currentOffer = _itemDisplay.CurrentOffer;
-        int realValue = _itemDisplay.CurrentItem.Value;
-
-        Debug.Log(currentOffer);
-        Debug.Log(realValue);
-        Debug.Log(currentOffer > realValue * 1.1f);
+        int dailyValue = _market.GetDailyPriceForItem(_itemDisplay.CurrentItem);
 
         // Display an emotion depending on the offer relative to the real value
-        if (currentOffer > realValue * 1.1f)
+        if (currentOffer > dailyValue * 1.1f)
         {
             // Sweat
             yield return AnimationHelper.Sweat();
         }
-        else if(currentOffer < realValue * 0.9f)
+        else if(currentOffer < dailyValue * 0.9f)
         {
             // Exclamation
             yield return AnimationHelper.Exclamation();
