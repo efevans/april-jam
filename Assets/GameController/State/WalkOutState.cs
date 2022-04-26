@@ -18,7 +18,6 @@ public class WalkOutState : GameState
     private IEnumerator WalkOut()
     {
         yield return _gameController.Patron.MoveToPoint(_gameController.SceneLocations.PatronOffScreenPosition.position);
-        //_gameController.SetState(new StartState(_gameController));
-        _gameController.SetState(new WalkInState(_gameController));
+        _gameController.SetState(new EmptyShopState(_gameController));
     }
 }

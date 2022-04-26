@@ -41,6 +41,7 @@ public class WaitForPlayerActionState : GameState
 
     private void BuyItem()
     {
+        _gameController.UseEnergy();
         int cost = _gameController.ItemDisplay.CurrentOffer;
         _gameController.PurchaseItem(cost);
         Proceed();
@@ -48,11 +49,13 @@ public class WaitForPlayerActionState : GameState
 
     private void DeclineItem()
     {
+        _gameController.UseEnergy();
         Proceed();
     }
 
     private void Research()
     {
+        _gameController.UseEnergy();
         _gameController.GoldDisplay.StartCoroutine(PlayoutResearch());
     }
 

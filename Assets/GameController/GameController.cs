@@ -18,6 +18,9 @@ public class GameController : IInitializable, ITickable
     public ItemDatabase ItemDatabase;
     public Settings MySettings;
 
+    public int Energy { get; private set; }
+    private readonly int DailyEnergy = 5;
+
     public int Gold { get; private set; } = 500;
 
     [Inject]
@@ -47,8 +50,9 @@ public class GameController : IInitializable, ITickable
 
     public void Initialize()
     {
-        SetState(DefaultGameState);
+        Energy = DailyEnergy;
         GoldDisplay.SetGold(Gold);
+        SetState(DefaultGameState);
     }
 
     public void Tick()
@@ -67,6 +71,17 @@ public class GameController : IInitializable, ITickable
         Gold -= price;
         GoldDisplay.SetGold(Gold);
         AudioSource.PlayOneShot(MySettings.OnBuy);
+    }
+
+    public void UseEnergy()
+    {
+        UseEnergy(1);
+        ScreenPrinter.Debug("Energy", Energy);
+    }
+
+    public void UseEnergy(int amount)
+    {
+        Energy -= amount;
     }
 
     [Serializable]
