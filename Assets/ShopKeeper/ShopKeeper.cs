@@ -6,14 +6,18 @@ using Zenject;
 public class ShopKeeper : MonoBehaviour
 {
     [SerializeField]
-    private Animator Animator;
+    private Animator _animator;
     [SerializeField]
-    private float Speed;
+    private float _speed;
     [SerializeField]
-    private ShopKeeperAnimationHelper AnimationHelper;
+    private ShopKeeperAnimationHelper _animationHelper;
+    [SerializeField]
+    private EnergyFill _energyFill;
 
     private ItemDisplay _itemDisplay;
     protected Market _market;
+
+    private readonly int DailyEnergy = 20;
 
     [Inject]
     public void Construct(ItemDisplay itemDisplay, Market market)
@@ -22,13 +26,33 @@ public class ShopKeeper : MonoBehaviour
         _market = market;
     }
 
+    public void Initialize()
+    {
+        _energyFill.SetFillMax(DailyEnergy);
+    }
+
+    public bool HasEnergy()
+    {
+        return _energyFill.CurrentAmount > 0;
+    }
+
+    public void SpendEnergy()
+    {
+        SpendEnergy(1);
+    }
+
+    public void SpendEnergy(int amount)
+    {
+        _energyFill.Deduct(amount);
+    }
+
     public IEnumerator MoveToPoint(Vector2 point)
     {
-        Animator.SetTrigger("StartWalking");
+        _animator.SetTrigger("StartWalking");
         SetFacedDirection(point);
         while (true)
         {
-            float speed = Speed * Time.deltaTime;
+            float speed = _speed * Time.deltaTime;
             gameObject.transform.Translate(new Vector2(point.x - transform.position.x, point.y - transform.position.y).normalized * speed, Space.World);
 
             if (Vector2.Distance(transform.position, point) < 1)
@@ -38,17 +62,17 @@ public class ShopKeeper : MonoBehaviour
 
             yield return null;
         }
-        Animator.SetTrigger("StopWalking");
+        _animator.SetTrigger("StopWalking");
     }
 
     public IEnumerator ShowItem()
     {
-        yield return AnimationHelper.ShowItem();
+        yield return _animationHelper.ShowItem();
     }
 
     public IEnumerator Research()
     {
-        yield return AnimationHelper.Research();
+        yield return _animationHelper.Research();
         int currentOffer = _itemDisplay.CurrentOffer;
         int dailyValue = _market.GetDailyPriceForItem(_itemDisplay.CurrentItem);
 
@@ -56,17 +80,17 @@ public class ShopKeeper : MonoBehaviour
         if (currentOffer > dailyValue * 1.1f)
         {
             // Sweat
-            yield return AnimationHelper.Sweat();
+            yield return _animationHelper.Sweat();
         }
         else if(currentOffer < dailyValue * 0.9f)
         {
             // Exclamation
-            yield return AnimationHelper.Exclamation();
+            yield return _animationHelper.Exclamation();
         }
         else
         {
             // Nod
-            yield return AnimationHelper.Nod();
+            yield return _animationHelper.Nod();
         }
     }
 

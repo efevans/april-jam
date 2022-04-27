@@ -10,7 +10,7 @@ public class EmptyShopState : GameState
 
     public override void Start()
     {
-        if (_gameController.Energy > 0)
+        if (_gameController.ShopKeeper.HasEnergy())
         {
             _gameController.SetState(new WalkInState(_gameController));
         }
