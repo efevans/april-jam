@@ -43,7 +43,7 @@ public class WaitForPlayerActionState : GameState
     {
         _gameController.ShopKeeper.SpendEnergy();
         int cost = _gameController.ItemDisplay.CurrentOffer;
-        _gameController.PurchaseItem(cost);
+        _gameController.PurchaseItem(_gameController.ItemDisplay.CurrentItem, cost);
         Proceed();
     }
 

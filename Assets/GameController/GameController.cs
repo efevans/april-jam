@@ -17,6 +17,8 @@ public class GameController : IInitializable, ITickable
     public AudioSource AudioSource;
     public ItemDatabase ItemDatabase;
     public Settings MySettings;
+    public DailyTip DailyTip;
+    public ResultsList ResultsList;
 
     public int Gold { get; private set; } = 500;
 
@@ -31,7 +33,9 @@ public class GameController : IInitializable, ITickable
         Settings mySettings,
         ItemDatabase itemDatabase,
         ShopKeeper shopKeeper,
-        Market market)
+        Market market,
+        DailyTip dailyTip,
+        ResultsList resultsList)
     {
         Patron = patron;
         SceneLocations = sceneLocations;
@@ -43,6 +47,8 @@ public class GameController : IInitializable, ITickable
         ItemDatabase = itemDatabase;
         ShopKeeper = shopKeeper;
         Market = market;
+        DailyTip = dailyTip;
+        ResultsList = resultsList;
     }
 
     public void Initialize()
@@ -63,10 +69,11 @@ public class GameController : IInitializable, ITickable
         _gameState.Start();
     }
 
-    public void PurchaseItem(int price)
+    public void PurchaseItem(Item item, int price)
     {
         Gold -= price;
         GoldDisplay.SetGold(Gold);
+        ResultsList.LogPurchase(item, price, Market.GetDailyPriceForItem(item));
         AudioSource.PlayOneShot(MySettings.OnBuy);
     }
 

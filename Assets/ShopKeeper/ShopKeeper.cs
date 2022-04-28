@@ -17,7 +17,7 @@ public class ShopKeeper : MonoBehaviour
     private ItemDisplay _itemDisplay;
     protected Market _market;
 
-    private readonly int DailyEnergy = 20;
+    private readonly int DailyEnergy = 1;
 
     [Inject]
     public void Construct(ItemDisplay itemDisplay, Market market)

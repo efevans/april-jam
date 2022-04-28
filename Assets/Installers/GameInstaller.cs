@@ -12,6 +12,11 @@ public class GameInstaller : MonoInstaller
     public SceneLocations SceneLocations;
     public ItemDatabase ItemDatabase;
     public ScreenPrinter ScreenPrinter;
+    public DailyTip DailyTip;
+    public ResultsList ResultsList;
+
+    public GameObject ResultLineItemPrefab;
+    public Transform ResultsContent;
 
     public override void InstallBindings()
     {
@@ -38,6 +43,16 @@ public class GameInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<SceneLocations>()
             .FromInstance(SceneLocations);
+
+        Container.BindInterfacesAndSelfTo<DailyTip>()
+            .FromInstance(DailyTip);
+
+        Container.BindInterfacesAndSelfTo<ResultsList>()
+            .FromInstance(ResultsList);
+
+        Container.BindFactory<ResultsList.Purchases.ProfitSummary, ResultLine, ResultLine.Factory>()
+            .FromComponentInNewPrefab(ResultLineItemPrefab)
+            .UnderTransform(ResultsContent);
 
         Container.BindInterfacesAndSelfTo<Market>()
             .FromNew()

@@ -14,5 +14,9 @@ public class EmptyShopState : GameState
         {
             _gameController.SetState(new WalkInState(_gameController));
         }
+        else
+        {
+            _gameController.ResultsList.Display();
+        }
     }
 }
