@@ -17,19 +17,19 @@ public class ResultLine : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _profitsText;
 
-    private ProfitSummary _profits;
+    public ProfitSummary ProfitSummary { get; private set; }
 
     [Inject]
     public void Construct(ProfitSummary profitSummary)
     {
-        _profits = profitSummary;
+        ProfitSummary = profitSummary;
     }
 
     private void OnEnable()
     {
-        _itemImage.sprite = _profits.Item.Sprite;
-        _itemCountText.text = _profits.Count.ToString();
-        _profitsText.text = $"{(_profits.Profit > 0 ? "+" : "")}{_profits.Profit}";
+        _itemImage.sprite = ProfitSummary.Item.Sprite;
+        _itemCountText.text = $"x{ProfitSummary.Count}";
+        _profitsText.text = $"{(ProfitSummary.Profit > 0 ? "+" : "")}{ProfitSummary.Profit}";
     }
 
     public class Factory : PlaceholderFactory<ProfitSummary, ResultLine> { }

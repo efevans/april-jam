@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,25 +9,34 @@ public class ResultsList : MonoBehaviour
 {
     private Purchases _purchases = new Purchases();
     private ResultLine.Factory _resultLineFactory;
+    private Stack<ResultLine> _results = new Stack<ResultLine>();
+
+    private ShopKeeper _shopKeeper;
+    private Market _market;
+    private AudioSource _audioSource;
+    private Settings _settings;
 
     [Inject]
-    public void Construct(ResultLine.Factory factory)
+    public void Construct(
+        ResultLine.Factory factory,
+        AudioSource audioSource,
+        Settings settings,
+        ShopKeeper shopKeeper,
+        Market market)
     {
         _resultLineFactory = factory;
+        _audioSource = audioSource;
+        _settings = settings;
+        _shopKeeper = shopKeeper;
+        _market = market;
     }
 
-    public void Display()
+    public IEnumerator Display()
     {
-        PopulateList();
         gameObject.SetActive(true);
-    }
-
-    private void PopulateList()
-    {
-        foreach (var itemProfit in _purchases.ItemProfits)
-        {
-            _resultLineFactory.Create(itemProfit);
-        }
+        yield return PopulateList();
+        yield return new WaitForSeconds(2);
+        yield return AddListItemsToGold();
     }
 
     public void LogPurchase(Item item, int purchasePrice, int marketPrice)
@@ -68,5 +78,35 @@ public class ResultsList : MonoBehaviour
 
             _itemProfits[item].LogPurchase(marketPrice - purchasePrice);
         }
+    }
+
+    private IEnumerator PopulateList()
+    {
+        foreach (var itemProfit in _purchases.ItemProfits)
+        {
+            yield return new WaitForSeconds(1f);
+            _audioSource.PlayOneShot(_settings.OnDisplayLine);
+            _results.Push(_resultLineFactory.Create(itemProfit));
+        }
+    }
+    private IEnumerator AddListItemsToGold()
+    {
+        while (_results.Count > 0)
+        {
+            yield return new WaitForSeconds(0.6f);
+            var line = _results.Pop();
+            int dailyPrice = _market.GetDailyPriceForItem(line.ProfitSummary.Item);
+            int total = line.ProfitSummary.Count * dailyPrice;
+            _shopKeeper.AddGold(total);
+            _audioSource.PlayOneShot(_settings.OnAddProfitsToPlayer);
+            Destroy(line.gameObject);
+        }
+    }
+
+    [Serializable]
+    public class Settings
+    {
+        public AudioClip OnDisplayLine;
+        public AudioClip OnAddProfitsToPlayer;
     }
 }

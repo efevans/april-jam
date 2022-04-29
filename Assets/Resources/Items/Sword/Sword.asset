@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dce011891faf1448991f64ee5c77b3f, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  Name: 
-  Value: 0
-  Sprite: {fileID: 0}
+  Name: Sword
+  Value: 250
+  Sprite: {fileID: 21300000, guid: e8f43b4870387764b9127ea8c3bbbd19, type: 3}

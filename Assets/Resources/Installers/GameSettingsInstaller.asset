@@ -16,5 +16,8 @@ MonoBehaviour:
     OnMoveCursor: {fileID: 8300000, guid: 13e5f4dd78db0624e95d18fd8920fab9, type: 3}
   ItemDisplaySettings:
     OnDisplay: {fileID: 8300000, guid: 6d0e6d27f1233e7449e3668936a16b29, type: 3}
+  ResultsListSettings:
+    OnDisplayLine: {fileID: 8300000, guid: b220ec5a11828e74a9bd0f6254729814, type: 3}
+    OnAddProfitsToPlayer: {fileID: 8300000, guid: e8333cd80b5cb024c8daa68e3664a9dc, type: 3}
   GameControllerSettings:
     OnBuy: {fileID: 8300000, guid: 00db8cb9c4528f345bbd2aaf23902540, type: 3}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dce011891faf1448991f64ee5c77b3f, type: 3}
   m_Name: Jacket
   m_EditorClassIdentifier: 
-  Name: 
-  Value: 0
-  Sprite: {fileID: 0}
+  Name: Jacket
+  Value: 200
+  Sprite: {fileID: 21300000, guid: 25d8c901315990a42be54abbe8371a8c, type: 3}

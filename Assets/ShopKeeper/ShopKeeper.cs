@@ -15,20 +15,41 @@ public class ShopKeeper : MonoBehaviour
     private EnergyFill _energyFill;
 
     private ItemDisplay _itemDisplay;
+    private GoldDisplay _goldDisplay;
     protected Market _market;
 
-    private readonly int DailyEnergy = 1;
+    private readonly int DailyEnergy = 5;
+    public int Gold { get; private set; }
 
     [Inject]
-    public void Construct(ItemDisplay itemDisplay, Market market)
+    public void Construct(ItemDisplay itemDisplay, GoldDisplay goldDisplay, Market market)
     {
         _itemDisplay = itemDisplay;
+        _goldDisplay = goldDisplay;
         _market = market;
     }
 
     public void Initialize()
     {
+        Gold = PlayerStats.Gold;
+        _goldDisplay.SetGold(Gold);
         _energyFill.SetFillMax(DailyEnergy);
+    }
+
+    public bool HasGold()
+    {
+        return Gold > 0;
+    }
+
+    public void SpendGold(int amount)
+    {
+        AddGold(-amount);
+    }
+
+    public void AddGold(int amount)
+    {
+        Gold += amount;
+        _goldDisplay.SetGold(Gold);
     }
 
     public bool HasEnergy()

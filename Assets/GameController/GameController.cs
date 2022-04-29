@@ -20,7 +20,6 @@ public class GameController : IInitializable, ITickable
     public DailyTip DailyTip;
     public ResultsList ResultsList;
 
-    public int Gold { get; private set; } = 500;
 
     [Inject]
     public GameController(
@@ -54,7 +53,6 @@ public class GameController : IInitializable, ITickable
     public void Initialize()
     {
         ShopKeeper.Initialize();
-        GoldDisplay.SetGold(Gold);
         SetState(DefaultGameState);
     }
 
@@ -71,8 +69,7 @@ public class GameController : IInitializable, ITickable
 
     public void PurchaseItem(Item item, int price)
     {
-        Gold -= price;
-        GoldDisplay.SetGold(Gold);
+        ShopKeeper.SpendGold(price);
         ResultsList.LogPurchase(item, price, Market.GetDailyPriceForItem(item));
         AudioSource.PlayOneShot(MySettings.OnBuy);
     }

@@ -10,13 +10,18 @@ public class EmptyShopState : GameState
 
     public override void Start()
     {
-        if (_gameController.ShopKeeper.HasEnergy())
+        if (DayCanContinue())
         {
             _gameController.SetState(new WalkInState(_gameController));
         }
         else
         {
-            _gameController.ResultsList.Display();
+            _gameController.SetState(new EndDayState(_gameController));
         }
+    }
+
+    private bool DayCanContinue()
+    {
+        return _gameController.ShopKeeper.HasEnergy() && _gameController.ShopKeeper.HasGold();
     }
 }

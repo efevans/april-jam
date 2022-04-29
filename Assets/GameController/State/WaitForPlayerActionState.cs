@@ -56,7 +56,7 @@ public class WaitForPlayerActionState : GameState
     private void Research()
     {
         _gameController.ShopKeeper.SpendEnergy();
-        _gameController.GoldDisplay.StartCoroutine(PlayoutResearch());
+        _gameController.ShopKeeper.StartCoroutine(PlayoutResearch());
     }
 
     private IEnumerator PlayoutResearch()
