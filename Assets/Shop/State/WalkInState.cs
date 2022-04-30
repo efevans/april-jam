@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkInState : GameState
+public class WalkInState : ShopState
 {
-    public WalkInState(GameController gameController) : base(gameController)
+    public WalkInState(ShopController gameController) : base(gameController)
     {
     }
 

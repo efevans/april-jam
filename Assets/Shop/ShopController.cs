@@ -2,10 +2,10 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class GameController : IInitializable, ITickable
+public class ShopController : IInitializable, ITickable
 {
-    private GameState _gameState;
-    private GameState DefaultGameState => new DayStartState(this);
+    private ShopState _gameState;
+    private ShopState DefaultGameState => new DayStartState(this);
 
     public Market Market { get; private set; }
     public ShopKeeper ShopKeeper { get; private set; }
@@ -22,7 +22,7 @@ public class GameController : IInitializable, ITickable
 
 
     [Inject]
-    public GameController(
+    public ShopController(
         Patron patron,
         SceneLocations sceneLocations,
         ItemDisplay itemDisplay,
@@ -61,7 +61,7 @@ public class GameController : IInitializable, ITickable
         _gameState.Update();
     }
 
-    public void SetState(GameState gameState)
+    public void SetState(ShopState gameState)
     {
         _gameState = gameState;
         _gameState.Start();

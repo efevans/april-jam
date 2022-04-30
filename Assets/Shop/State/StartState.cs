@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StartState : GameState
+public class StartState : ShopState
 {
-    public StartState(GameController gameController) : base(gameController)
+    public StartState(ShopController gameController) : base(gameController)
     {
     }
 

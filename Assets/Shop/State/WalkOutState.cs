@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkOutState : GameState
+public class WalkOutState : ShopState
 {
-    public WalkOutState(GameController gameController) : base(gameController)
+    public WalkOutState(ShopController gameController) : base(gameController)
     {
 
     }

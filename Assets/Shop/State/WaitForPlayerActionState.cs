@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaitForPlayerActionState : GameState
+public class WaitForPlayerActionState : ShopState
 {
-    public WaitForPlayerActionState(GameController gameController) : base(gameController)
+    public WaitForPlayerActionState(ShopController gameController) : base(gameController)
     {
     }
 

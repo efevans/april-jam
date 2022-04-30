@@ -4,12 +4,12 @@ using UnityEngine;
 using Zenject;
 
 [CreateAssetMenu(fileName = "GameSettingsInstaller", menuName = "Installers/GameSettingsInstaller")]
-public class GameSettingsInstaller : ScriptableObjectInstaller<GameSettingsInstaller>
+public class ShopSettingsInstaller : ScriptableObjectInstaller<ShopSettingsInstaller>
 {
     public OptionsMenu.Settings OptionsMenuSettings;
     public ItemDisplay.Settings ItemDisplaySettings;
     public ResultsList.Settings ResultsListSettings;
-    public GameController.Settings GameControllerSettings;
+    public ShopController.Settings GameControllerSettings;
 
     public override void InstallBindings()
     {

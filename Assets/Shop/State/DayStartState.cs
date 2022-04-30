@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DayStartState : GameState
+public class DayStartState : ShopState
 {
-    public DayStartState(GameController gameController) : base(gameController)
+    public DayStartState(ShopController gameController) : base(gameController)
     {
     }
 

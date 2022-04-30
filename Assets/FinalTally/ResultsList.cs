@@ -7,10 +7,10 @@ using Zenject;
 
 public class ResultsList : MonoBehaviour
 {
-    private Purchases _purchases = new Purchases();
-    private ResultLine.Factory _resultLineFactory;
-    private Stack<ResultLine> _results = new Stack<ResultLine>();
+    private readonly Purchases _purchases = new Purchases();
+    private readonly Stack<ResultLine> _results = new Stack<ResultLine>();
 
+    private ResultLine.Factory _resultLineFactory;
     private ShopKeeper _shopKeeper;
     private Market _market;
     private AudioSource _audioSource;
@@ -37,6 +37,11 @@ public class ResultsList : MonoBehaviour
         yield return PopulateList();
         yield return new WaitForSeconds(2);
         yield return AddListItemsToGold();
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 
     public void LogPurchase(Item item, int purchasePrice, int marketPrice)

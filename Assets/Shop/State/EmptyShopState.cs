@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyShopState : GameState
+public class EmptyShopState : ShopState
 {
-    public EmptyShopState(GameController gameController) : base(gameController)
+    public EmptyShopState(ShopController gameController) : base(gameController)
     {
     }
 

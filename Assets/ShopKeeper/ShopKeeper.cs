@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,13 @@ public class ShopKeeper : MonoBehaviour
     private GoldDisplay _goldDisplay;
     protected Market _market;
 
-    private readonly int DailyEnergy = 5;
+    private readonly int DailyEnergy = 3;
+
+    public void SaveGold()
+    {
+        PlayerStats.Gold = Gold;
+    }
+
     public int Gold { get; private set; }
 
     [Inject]

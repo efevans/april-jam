@@ -18,16 +18,18 @@ public class DailyTip : MonoBehaviour
     [SerializeField]
     private Animator _animator;
     private bool _displayAnimationFinished = false;
+    private bool _fadeOutFinished = false;
 
     private Market _market;
     private ItemDatabase _itemDatabase;
 
-    private List<string> _tips = new List<string>()
+    private readonly List<string> _tips = new List<string>()
     {
         "prices will change each day...",
         $"watch out for people{Environment.NewLine}trying to cheat you...",
         $"if you think you are being swindled,{Environment.NewLine}declining early is best",
-        $"you can research an item to determine{Environment.NewLine}the fairness of the offer"
+        $"you can research an item to determine{Environment.NewLine}the fairness of the offer",
+        $"researching earlier in the day{Environment.NewLine}is better"
     };
 
     [Inject]
@@ -58,6 +60,22 @@ public class DailyTip : MonoBehaviour
     public void DisplayFinished()
     {
         _displayAnimationFinished = true;
+    }
+
+    public IEnumerator FadeOut()
+    {
+        // play animation
+        _animator.SetTrigger("FadeOut");
+
+        // wait for animation end message to be received
+        yield return new WaitUntil(() => { return _fadeOutFinished == true; });
+
+        _fadeOutFinished = false;
+    }
+
+    public void FadeOutFinished()
+    {
+        _fadeOutFinished = true;
     }
 
     private IEnumerator Display(string text)

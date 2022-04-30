@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class GameInstaller : MonoInstaller
+public class ShopInstaller : MonoInstaller
 {
     public AudioSource AudioSource;
     public ItemDisplay ItemDisplay;
@@ -59,7 +59,7 @@ public class GameInstaller : MonoInstaller
             .AsSingle()
             .Lazy();
 
-        Container.BindInterfacesAndSelfTo<GameController>()
+        Container.BindInterfacesAndSelfTo<ShopController>()
             .FromNew()
             .AsSingle()
             .Lazy();

@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class GameState
+public abstract class ShopState
 {
-    protected GameController _gameController;
+    protected ShopController _gameController;
 
-    public GameState(GameController gameController)
+    public ShopState(ShopController gameController)
     {
         _gameController = gameController;
     }

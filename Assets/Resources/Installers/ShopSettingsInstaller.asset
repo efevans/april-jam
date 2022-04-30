@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc97f94898c14b049a0b7cabe1750f8b, type: 3}
-  m_Name: GameSettingsInstaller
+  m_Name: ShopSettingsInstaller
   m_EditorClassIdentifier: 
   OptionsMenuSettings:
     OnMoveCursor: {fileID: 8300000, guid: 13e5f4dd78db0624e95d18fd8920fab9, type: 3}
