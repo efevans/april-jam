@@ -39,6 +39,25 @@ public class DailyTip : MonoBehaviour
         _itemDatabase = itemDatabase;
     }
 
+    public IEnumerator DisplayTip()
+    {
+        if (Day.Number == 1)
+        {
+            yield return DisplayGeneralTip();
+        }
+        else
+        {
+            if (UnityEngine.Random.Range(0, 2) == 0)
+            {
+                yield return DisplayGeneralTip();
+            }
+            else
+            {
+                yield return DisplayPriceTip();
+            }
+        }
+    }
+
     public IEnumerator DisplayGeneralTip()
     {
         string randomTip = _tips[UnityEngine.Random.Range(0, _tips.Count)];

@@ -22,7 +22,6 @@ public class DayStartState : ShopState
 
     private IEnumerator DisplayTipOfTheDay()
     {
-        // If this is the first day, always display a general tip, otherwise randomize between general and price
-        yield return _gameController.DailyTip.DisplayGeneralTip();
+        yield return _gameController.DailyTip.DisplayTip();
     }
 }
