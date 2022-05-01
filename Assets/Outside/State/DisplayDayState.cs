@@ -11,7 +11,14 @@ public class DisplayDayState : OutsideState
 
     public override void Start()
     {
-        _controller.Message.StartCoroutine(DisplayDay());
+        if (Day.Number <= 5)
+        {
+            _controller.Message.StartCoroutine(DisplayDay());
+        }
+        else
+        {
+            _controller.Message.StartCoroutine(DisplayEndResult());
+        }
     }
 
     private IEnumerator DisplayDay()
@@ -20,5 +27,11 @@ public class DisplayDayState : OutsideState
         yield return _controller.Message.DisplayDay();
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene("Shop", LoadSceneMode.Single);
+    }
+
+    private IEnumerator DisplayEndResult()
+    {
+        yield return new WaitForSeconds(1);
+        yield return _controller.Message.DisplayEndResult();
     }
 }

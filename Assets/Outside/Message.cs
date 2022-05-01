@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -14,7 +15,15 @@ public class Message : MonoBehaviour
     public IEnumerator DisplayDay()
     {
         _animator.SetTrigger("Display");
-        _textObj.text = $"Day {Day.Number}";
+
+        if (Day.Number < 5)
+        {
+            _textObj.text = $"Day {Day.Number}";
+        }
+        else
+        {
+            _textObj.text = "Final Day";
+        }
 
         // Wait until animation is finished
         yield return new WaitUntil(() => { return _isAnimating == true; });
@@ -22,7 +31,20 @@ public class Message : MonoBehaviour
         _isAnimating = false;
     }
 
-    public void DisplayDone()
+    public IEnumerator DisplayEndResult()
+    {
+        _animator.SetTrigger("FadeIn");
+        _textObj.text = $"Ending Gold Count:{Environment.NewLine} ";
+
+        // Wait until animation is finished
+        yield return new WaitUntil(() => { return _isAnimating == true; });
+        yield return new WaitForSeconds(2f);
+        _textObj.text = $"Ending Gold Count:{Environment.NewLine}{PlayerStats.Gold}";
+
+        _isAnimating = false;
+    }
+
+    public void DoneAnimating()
     {
         _isAnimating = true;
     }

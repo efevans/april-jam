@@ -20,4 +20,6 @@ MonoBehaviour:
     OnDisplayLine: {fileID: 8300000, guid: b220ec5a11828e74a9bd0f6254729814, type: 3}
     OnAddProfitsToPlayer: {fileID: 8300000, guid: e8333cd80b5cb024c8daa68e3664a9dc, type: 3}
   GameControllerSettings:
+    BGM: {fileID: 8300000, guid: 45cfe13ed7a044d45b94d4adeef7445e, type: 3}
+    BGMVolume: 0.465
     OnBuy: {fileID: 8300000, guid: 00db8cb9c4528f345bbd2aaf23902540, type: 3}

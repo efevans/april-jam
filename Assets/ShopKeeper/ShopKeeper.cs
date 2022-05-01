@@ -19,7 +19,7 @@ public class ShopKeeper : MonoBehaviour
     private GoldDisplay _goldDisplay;
     protected Market _market;
 
-    private readonly int DailyEnergy = 3;
+    private readonly int DailyEnergy = 10;
 
     public void SaveGold()
     {
